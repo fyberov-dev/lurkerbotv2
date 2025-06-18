@@ -8,7 +8,7 @@ const useChatLogger = logger(chalk.magenta, LoggerType.COMMAND);
 
 // export const usersToWatch: string[] = [];
 
-export const usersToWatch: { [key: string]: string[] } = {};
+export const usersToWatch: { [key: string]: Set<string> } = {};
 
 const execute = (executor: string, from: string, user: string): void => {
     if (
@@ -17,7 +17,7 @@ const execute = (executor: string, from: string, user: string): void => {
         (!Object.keys(usersToWatch).includes(from) && from !== MAIN_CHANNEL)
     )
         return;
-    if (usersToWatch[from].includes(user)) {
+    if (usersToWatch[from].has(user)) {
         removeUser(user, from);
     } else {
         addUser(user, from);
@@ -28,22 +28,27 @@ const addUser = (user: string, from: string): void => {
     botSocket.send(`PRIVMSG #${from} :watching ${user}...`);
     useChatLogger.log(`watching ${user}`);
     if (from in usersToWatch) {
-        usersToWatch[from].push(user);
+        usersToWatch[from].add(user);
     } else {
-        usersToWatch[from] = [user];
+        usersToWatch[from] = new Set([user]);
     }
 };
 
 export const removeUser = (user: string, from: string): void => {
     botSocket.send(`PRIVMSG #${from} :end ${user}`);
     useChatLogger.log(`not watching ${user}`);
-    const indexOfUser: number = usersToWatch[from].indexOf(user);
-    delete usersToWatch[from][indexOfUser];
+    usersToWatch[from].delete(user);
+};
+
+export const unlurk = (user: string): void => {
+    for (const key of Object.keys(usersToWatch)) {
+        usersToWatch[key].delete(user);
+    }
 };
 
 export const isWatched = (user: string): string | null => {
     for (const [key, value] of Object.entries(usersToWatch)) {
-        if (value.includes(user)) {
+        if (value.has(user)) {
             return key;
         }
     }
