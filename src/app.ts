@@ -3,6 +3,7 @@ import lurkerSocket from "./socket/lurker.socket";
 import "./socket/bot.socket";
 import { intervalLog } from "./util/log.util";
 import { generateHelpFile } from "./util/help.util";
+import http from "http";
 
 export const MAIN_CHANNEL = process.env.TWITCH_MAIN_CHANNEL;
 export const OWNER = process.env.TWITCH_BOT_OWNER;
@@ -19,3 +20,15 @@ lurkerSocket.addLurkerSocket();
 
 intervalLog();
 generateHelpFile();
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("Bot is up");
+});
+
+const PORT: number = Number(process.env.port) || 3000;
+
+server.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
+});
