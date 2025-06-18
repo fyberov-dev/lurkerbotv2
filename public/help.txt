@@ -1,0 +1,196 @@
+* HELP
+    USAGE: O_O help
+    DESCRIPTION: Show commands
+    PERMISSION: ANY USER
+    ALTERNATIVE COMMAND: O_O h
+
+* ADD LURKER
+    USAGE: O_O add_lurker <number>
+    DESCRIPTION: Add new lurker socket connections
+    PERMISSION: ONLY BOT OWNER
+    PROPS: 
+        - number: a number of connections to add
+                  * min value: 1
+    EXAMPLES:
+        - O_O add_lurker 50
+    ALTERNATIVE COMMAND: O_O al
+
+* JOIN
+    USAGE: O_O join <channel>
+    DESCRIPTION: Join channel to start lurking it
+    PERMISSION: WITH PERMIT ONLY
+    PROPS:
+        - channel: the channel to start lurking
+    ALTERNATIVE COMMAND: O_O j
+
+* MASS JOIN
+    USAGE: O_O mass_join <channel>
+    DESCRIPTION: Start lurking all chatters and chatters followers of certain channel
+    PERMISSION: ONLY BOT OWNER
+    PROPS:
+        - channel: the channel to start lurking
+    ALTERNATIVE COMMAND: O_O mj
+
+* LURK
+    USAGE: O_O lurk <channel>
+    DESCRIPTION: Start lurking messages of certain user
+    PERMISSION: WITH PERMIT ONLY
+    PROPS:
+        - channel: the channel to start lurking.
+                   * you can enumerate users using coma (withouth whitespaces) to start lurking many users
+    EXAMPLES: 
+        - O_O lurk xqc
+        - O_O lurk xqc,kaicenat
+    ALTERNATIVE COMMAND: O_O l
+
+* UNLURK
+    USAGE: O_O unlurk <channel>
+    DESCRIPTION: Stop lurking messages of certain user
+    PERMISSION: WITH PERMIT ONLY
+    PROPS:
+        - channel: the channel to stop lurking
+    ALTERNATIVE COMMAND: O_O unl
+
+* IS JOINED
+    USAGE: O_O is_joined <channel>
+    DESCRIPTION: Check if bot is lurking certain channel
+    PERMISSION: WITH PERMIT ONLY
+    PROPS:
+        - channel: the channel to check whether the bot has joined or not
+    ALTERNATIVE COMMAND: O_O isj
+
+* WATCH
+    USAGE: O_O watch <user>
+    DESCRIPTION: Start mirroring messages of certain user to the TWITCH_MAIN_CHANNEL. The bot will start lurking all followed channels of this users.
+    PERMISSION: WITH PERMIT ONLY
+    PROPS:
+        - user: the lurked user whose messages will be mirrored
+    ALTERNATIVE COMMAND: O_O w
+
+* LURK CHANNEL
+    USAGE: O_O lurk_channel <channel>
+    DESCRIPTION: Start mirroring all messages of users to the TWITCH_MAIN_CHANNEL
+    PERMISSION: WITH PERMIT ONLY
+    PROPS: 
+        - channel: the channel to start lurking all users
+    ALTERNATIVE COMMAND: O_O lc
+
+* DEAD SOCKET
+    USAGE: O_O dead_socket
+    DESCRIPTION: Check for dead sockets
+    PERMISSION: WITH PERMIT ONLY
+    ALTERNATIVE COMMAND: O_O ds
+
+* ADD MENTION
+    USAGE: O_O add_mention <message>
+    DESCRIPTION: Add word you will be mentioned by (in any chat)
+    PERMISSION: ANY USER
+    PROPS: 
+        - message: any message to get mentioned by
+    ALTERNATIVE COMMAND: O_O addm
+
+* DELETE MENTION
+    USAGE: O_O delete_mention <message>
+    DESCRIPTION: Delete mention word
+    PERMISSION: ANY USER
+    PROPS:
+        - message: message to stop being mentioned by
+    ALTERNATIVE COMMAND: O_O delm
+
+* CHECK MENTION
+    USAGE: O_O check_mention
+    DESCRIPTION: Check words that will mention you
+    PERMISSION: ANY USER
+    ALTERNATIVE COMMAND: O_O chkm
+
+* RESET MENTION
+    USAGE: O_O reset_mention
+    DESCRIPTION: Reset mention buffer
+    PERMISSION: ONLY BOT OWNER
+    ALTERNATIVE COMMAND: O_O resm
+
+* CLEAR MENTION
+    USAGE: O_O clear_mention <user>
+    DESCRIPTION: Clear mentions of certain user
+    PERMISSION: WITH PERMIT ONLY
+    PROPS:
+        - user: user whom mentions will get cleared
+    ALTERNATIVE COMMAND: O_O cm
+
+* WATCH LURKING
+    USAGE: O_O watch_lurking
+    DESCRIPTION: Check currently being lurked users
+    PERMISSION: WITH PERMIT ONLY
+    ALTERNATIVE COMMAND: O_O wl
+
+* FOLLOWS
+    USAGE: O_O follows <user>
+    DESCRIPTION: Check user follows
+    PERMISSION: ANY USER
+    PROPS:
+        - user: user to check follows
+    ALTERNATIVE COMMAND: O_O f
+
+* IS MOD
+    USAGE: O_O is_mod <channel> <user>
+    DESCRIPTION: Check if user is moderator of certain channel
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to check whether certain user is moderator or not
+        - user: user to check if moderator
+    ALTERNATIVE COMMAND: O_O mod
+
+* IS VIP
+    USAGE: O_O is_vip <channel> <user>
+    DESCRIPTION: Check if user is vip of certain channel
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to check whether certain user is vip or not
+        - user: user to check if vip
+    ALTERNATIVE COMMAND: O_O vip
+
+* GET MODS
+    USAGE: O_O get_mods <channel>
+    DESCRIPTION: Get all moderators of certain channel
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to get list of moderators from
+    ALTERNATIVE COMMAND: O_O mods
+
+* GET VIPS
+    USAGE: O_O get_vips <channel>
+    DESCRIPTION: Get all vips of certain channel
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to get list of vips from
+    ALTERNATIVE COMMAND: O_O vips
+
+* FOLLOWAGE
+    USAGE: O_O followage <channel> <user>
+    DESCRIPTION: Check since what date user is following channel (if follows)
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to check certain user
+        - user: user to check
+    ALTERNATIVE COMMAND: O_O fa
+
+* USER
+    USAGE: O_O user <channel>
+    DESCRIPTION: Get info about the channel
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to get info about
+    ALTERNATIVE COMMAND: O_O u
+
+* FOUNDERS
+    USAGE: O_O founders <channel>
+    DESCRIPTION: Get list of founders of certain channel
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channel to get founders of
+
+
+* KILL
+    USAGE: O_O kill
+    DESCRIPTION: Kill bot
+    PERMISSION: ONLY BOT OWNER

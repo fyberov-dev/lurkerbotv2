@@ -1,0 +1,21 @@
+import "dotenv/config";
+import lurkerSocket from "./socket/lurker.socket";
+import "./socket/bot.socket";
+import { intervalLog } from "./util/log.util";
+import { generateHelpFile } from "./util/help.util";
+
+export const MAIN_CHANNEL = process.env.TWITCH_MAIN_CHANNEL;
+export const OWNER = process.env.TWITCH_BOT_OWNER;
+export let logCooldown = Number(process.env.TWITCH_LOG_COOLDOWN) ?? 150000;
+export const DEFAULT_PREFIX = "O_O";
+export const COMMAND_COOLDOWN = 3000;
+
+if (!MAIN_CHANNEL || !OWNER) {
+    console.log("PROVIDE TWITCH_MAIN_CHANNEL IN .ENV FILE");
+    process.exit(0);
+}
+
+lurkerSocket.addLurkerSocket();
+
+intervalLog();
+generateHelpFile();
