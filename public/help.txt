@@ -189,6 +189,12 @@
     PROPS:
         - channel: channel to get founders of
 
+* LOGS
+    USAGE: O_O logs <channel>
+    DESCRIPTION: Get channels logs
+    PERMISSION: ANY USER
+    PROPS:
+        - channel: channels to get logs from
 
 * KILL
     USAGE: O_O kill

@@ -27,6 +27,7 @@ import clearUserMentionCommand from "../command/clear.user.mention.command";
 import killCommand from "../command/kill.command";
 import { COMMAND_COOLDOWN } from "../app";
 import pingCommand from "../command/ping.command";
+import logsCommand from "../command/logs.command";
 
 let canBeExecutedAfter: Date = new Date();
 
@@ -143,6 +144,9 @@ export const onCommand = (data: string): void => {
         case "cm":
         case "clear_mention":
             clearUserMentionCommand.execute(commandData.username, commandData.properties[0]);
+            break;
+        case "logs":
+            logsCommand.execute(commandData.username, commandData.properties[0]);
             break;
         case "kill":
             killCommand.execute(commandData.username);
