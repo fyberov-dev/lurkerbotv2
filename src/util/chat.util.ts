@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { MAIN_CHANNEL } from "../app";
 import { logger, LoggerType } from "../logger/logger";
 import { botSocket } from "../socket/bot.socket";
+import lurkerSocket, { lurkerSockets } from "../socket/lurker.socket";
 
 const chatLogger = logger(chalk.bgBlueBright, LoggerType.CHAT);
 
@@ -17,11 +18,11 @@ export const sendToChatAfter = (n: number) => {
     };
 };
 
-export const joinedChannelsByBot: Set<string> = new Set([MAIN_CHANNEL!]);
+export const joinedChannelsByBot: Set<string> = new Set();
 
 export const addChat = (channel: string): void => {
-    botSocket.send(`JOIN #${channel}`);
     joinedChannelsByBot.add(channel);
+    botSocket.send(`JOIN #${channel}`);
     chatLogger.log(`BOT JOINED #${channel}`);
 };
 

@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { OWNER } from "../app";
 import { addChat } from "../util/chat.util";
 

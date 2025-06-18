@@ -1,8 +1,9 @@
 import chalk from "chalk";
 import { logger, LoggerInstance, LoggerType } from "../logger/logger";
 import { checkIfActive, checkIfMessage, checkIfPing } from "../util/status.util";
-import { MAIN_CHANNEL } from "../app";
+import { channelsToJoinByDefault, MAIN_CHANNEL } from "../app";
 import event from "../event";
+import { addChat } from "../util/chat.util";
 
 const botLogger: LoggerInstance = logger(chalk.yellow, LoggerType.BOT);
 
@@ -20,6 +21,9 @@ const createBotSocket = () => {
     socket.onmessage = ({ data }: MessageEvent<string>): void => {
         if (checkIfActive(data)) {
             socket.send(`JOIN #${MAIN_CHANNEL}`);
+            for (const channel of channelsToJoinByDefault) {
+                addChat(channel);
+            }
             botLogger.log(`bot socket connected to the ${MAIN_CHANNEL}`);
         } else if (checkIfPing(data)) {
             socket.send("PONG :tmi.twitch.tv");

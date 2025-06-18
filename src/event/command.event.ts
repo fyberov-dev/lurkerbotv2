@@ -25,7 +25,7 @@ import userCommand from "../command/user.command";
 import founderCommand from "../command/founder.command";
 import clearUserMentionCommand from "../command/clear.user.mention.command";
 import killCommand from "../command/kill.command";
-import { COMMAND_COOLDOWN } from "../app";
+import { COMMAND_COOLDOWN, MAIN_CHANNEL } from "../app";
 import pingCommand from "../command/ping.command";
 import logsCommand from "../command/logs.command";
 import { addChat, joinedChannelsByBot } from "../util/chat.util";
@@ -40,7 +40,11 @@ export const onCommand = (data: string): void => {
         return;
     }
     const currentTime = new Date();
-    if (currentTime < canBeExecutedAfter || !joinedChannelsByBot.has(commandData.channel)) return;
+    if (
+        currentTime < canBeExecutedAfter ||
+        (!joinedChannelsByBot.has(commandData.channel) && commandData.channel !== MAIN_CHANNEL)
+    )
+        return;
     switch (commandData.command) {
         case "ping":
             pingCommand.execute(commandData.channel);
