@@ -3,21 +3,15 @@ import { logger, LoggerType } from "../logger/logger";
 import { botSocket } from "../socket/bot.socket";
 import { MAIN_CHANNEL } from "../app";
 import { isPermitted } from "../util/permit.util";
+import { getCurrentDate } from "../util/time.util";
 
 const useChatLogger = logger(chalk.magenta, LoggerType.COMMAND);
-
-// export const usersToWatch: string[] = [];
 
 export const usersToWatch: { [key: string]: Set<string> } = {};
 
 const execute = (executor: string, from: string, user: string): void => {
-    if (
-        !user ||
-        !isPermitted(executor) ||
-        (!Object.keys(usersToWatch).includes(from) && from !== MAIN_CHANNEL)
-    )
-        return;
-    if (usersToWatch[from].has(user)) {
+    if (!user || !isPermitted(executor)) return;
+    if (usersToWatch[from] && usersToWatch[from].has(user)) {
         removeUser(user, from);
     } else {
         addUser(user, from);
@@ -40,19 +34,18 @@ export const removeUser = (user: string, from: string): void => {
     usersToWatch[from].delete(user);
 };
 
-export const unlurk = (user: string): void => {
+export const clearUserWatch = (user: string): void => {
     for (const key of Object.keys(usersToWatch)) {
         usersToWatch[key].delete(user);
     }
 };
 
-export const isWatched = (user: string): string | null => {
+export const logMessages = (user: string, message: string): void => {
     for (const [key, value] of Object.entries(usersToWatch)) {
         if (value.has(user)) {
-            return key;
+            botSocket.send(`PRIVMSG #${key} : [${getCurrentDate()}] ${message}`);
         }
     }
-    return null;
 };
 
 export default {
