@@ -8,7 +8,7 @@ import {
 } from "../util/message.util";
 import { MAIN_CHANNEL } from "../app";
 import { lurking } from "../util/lurk.util";
-import { usersToWatch } from "../command/watch.user.command";
+import { logMessages, usersToWatch } from "../command/watch.user.command";
 import { botSocket } from "../socket/bot.socket";
 import { getCurrentDate } from "../util/time.util";
 import { LurkerSocket, lurkerSockets } from "../socket/lurker.socket";
@@ -25,9 +25,7 @@ export const onMessage = (id: number, data: string): void => {
         const message = `[#${messageData.channel}] ${messageData.username}: ${messageData.message}`;
         messageLogger.log(chalk.bgYellowBright(message));
         addMessageToBuffer(messageData.username, message);
-        if (usersToWatch.includes(messageData.username)) {
-            botSocket.send(`PRIVMSG #${MAIN_CHANNEL} :[${getCurrentDate()}] ${message}`);
-        }
+        logMessages(messageData.username, message);
     } else {
         const currentSocket: LurkerSocket = lurkerSockets[id - 1];
         currentSocket.temp++;

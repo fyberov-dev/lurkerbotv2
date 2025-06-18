@@ -79,7 +79,7 @@ export const onCommand = (data: string): void => {
             break;
         case "w":
         case "watch":
-            watchUserCommand.execute(commandData.username, commandData.properties[0]);
+            watchUserCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "ds":
         case "dead_socket":

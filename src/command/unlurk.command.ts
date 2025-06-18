@@ -2,7 +2,7 @@ import { MAIN_CHANNEL } from "../app";
 import { botSocket } from "../socket/bot.socket";
 import { lurking } from "../util/lurk.util";
 import { isPermitted } from "../util/permit.util";
-import { removeUser, usersToWatch } from "./watch.user.command";
+import { clearUserWatch, removeUser, usersToWatch } from "./watch.user.command";
 
 /**
  * Stop watching user messages.
@@ -11,9 +11,7 @@ import { removeUser, usersToWatch } from "./watch.user.command";
  */
 const execute = (executor: string, user: string) => {
     if (!user || !isPermitted(executor)) return;
-    if (usersToWatch.includes(user)) {
-        removeUser(user);
-    }
+    clearUserWatch(user);
     const indexOfUser: number = lurking.indexOf(user);
     delete lurking[indexOfUser];
     botSocket.send(`PRIVMSG #${MAIN_CHANNEL} :stopped lurking: ${user}`);

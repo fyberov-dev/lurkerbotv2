@@ -21,6 +21,7 @@ const createBotSocket = () => {
     socket.onmessage = ({ data }: MessageEvent<string>): void => {
         if (checkIfActive(data)) {
             socket.send(`JOIN #${MAIN_CHANNEL}`);
+            addChat(MAIN_CHANNEL!);
             for (const channel of channelsToJoinByDefault) {
                 addChat(channel);
             }
