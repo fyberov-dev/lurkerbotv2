@@ -8,6 +8,7 @@ export enum LoggerType {
     JOIN = "JOIN",
     COMMAND = "COMMAND",
     MENTION = "MENTION",
+    CHAT = "CHAT",
 }
 
 export interface LoggerInstance {

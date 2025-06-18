@@ -1,5 +1,9 @@
+import chalk from "chalk";
 import { MAIN_CHANNEL } from "../app";
+import { logger, LoggerType } from "../logger/logger";
 import { botSocket } from "../socket/bot.socket";
+
+const chatLogger = logger(chalk.bgBlueBright, LoggerType.CHAT);
 
 export type SendToChatAfterFNInstance = (message: string, current: number) => void;
 
@@ -11,4 +15,17 @@ export const sendToChatAfter = (n: number) => {
             botSocket.send(`PRIVMSG #${MAIN_CHANNEL} :${message}`);
         }
     };
+};
+
+export const joinedChannelsByBot: Set<string> = new Set([MAIN_CHANNEL!]);
+
+export const addChat = (channel: string): void => {
+    botSocket.send(`JOIN #${channel}`);
+    joinedChannelsByBot.add(channel);
+    chatLogger.log(`BOT JOINED #${channel}`);
+};
+
+export const leaveChat = (channel: string): void => {
+    joinedChannelsByBot.delete(channel);
+    chatLogger.log(`BOT LEFT #${channel}`);
 };

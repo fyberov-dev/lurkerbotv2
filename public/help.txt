@@ -196,6 +196,20 @@
     PROPS:
         - channel: channels to get logs from
 
+* ADD CHAT
+    USAGE: O_O add_chat <channel>
+    DESCRIPTION: Add bot to the channel
+    PERMISSION: ONLY BOT OWNER
+    PROPS:
+        - channel: channel to join
+
+* LEAVE CHAT
+    USAGE: O_O leave_chat <channel>
+    DESCRIPTION: Kick bot from the channel
+    PERMISSION: ONLY BOT OWNER
+    PROPS:
+        - channel: channel to leave from
+
 * KILL
     USAGE: O_O kill
     DESCRIPTION: Kill bot

@@ -28,6 +28,9 @@ import killCommand from "../command/kill.command";
 import { COMMAND_COOLDOWN } from "../app";
 import pingCommand from "../command/ping.command";
 import logsCommand from "../command/logs.command";
+import { addChat, joinedChannelsByBot } from "../util/chat.util";
+import addChatCommand from "../command/add.chat.command";
+import leaveChatCommand from "../command/leave.chat.command";
 
 let canBeExecutedAfter: Date = new Date();
 
@@ -37,14 +40,14 @@ export const onCommand = (data: string): void => {
         return;
     }
     const currentTime = new Date();
-    if (currentTime < canBeExecutedAfter) return;
+    if (currentTime < canBeExecutedAfter || !joinedChannelsByBot.has(commandData.channel)) return;
     switch (commandData.command) {
         case "ping":
-            pingCommand.execute();
+            pingCommand.execute(commandData.channel);
             break;
         case "h":
         case "help":
-            helpCommand.execute();
+            helpCommand.execute(commandData.channel);
             break;
         case "al":
         case "add_lurker":
@@ -107,46 +110,63 @@ export const onCommand = (data: string): void => {
             break;
         case "f":
         case "follows":
-            followsCommand.execute(commandData.username, commandData.properties[0]);
+            followsCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "mod":
         case "is_mod":
-            isModCommand.execute(commandData.username, commandData.properties[0], commandData.properties[1]);
+            isModCommand.execute(
+                commandData.username,
+                commandData.channel,
+                commandData.properties[0],
+                commandData.properties[1]
+            );
             break;
         case "vip":
         case "is_vip":
-            isVipCommand.execute(commandData.username, commandData.properties[0], commandData.properties[1]);
+            isVipCommand.execute(
+                commandData.username,
+                commandData.channel,
+                commandData.properties[0],
+                commandData.properties[1]
+            );
             break;
         case "mods":
         case "get_mods":
-            getModsCommand.execute(commandData.username, commandData.properties[0]);
+            getModsCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "vips":
         case "get_vips":
-            getVipsCommand.execute(commandData.username, commandData.properties[0]);
+            getVipsCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "fa":
         case "followage":
             followageCommand.execute(
                 commandData.username,
+                commandData.channel,
                 commandData.properties[0],
                 commandData.properties[1]
             );
             break;
         case "u":
         case "user":
-            userCommand.execute(commandData.username, commandData.properties[0]);
+            userCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "fou":
         case "founders":
-            founderCommand.execute(commandData.username, commandData.properties[0]);
+            founderCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "cm":
         case "clear_mention":
             clearUserMentionCommand.execute(commandData.username, commandData.properties[0]);
             break;
         case "logs":
-            logsCommand.execute(commandData.username, commandData.properties[0]);
+            logsCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
+            break;
+        case "add_chat":
+            addChatCommand.execute(commandData.username, commandData.properties[0]);
+            break;
+        case "leave_chat":
+            leaveChatCommand.execute(commandData.username, commandData.properties[0]);
             break;
         case "kill":
             killCommand.execute(commandData.username);
