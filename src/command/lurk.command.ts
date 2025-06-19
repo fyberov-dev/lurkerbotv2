@@ -2,7 +2,7 @@ import followsApi, { FollowedChannel } from "../api/follows.api";
 import { lurk } from "../util/lurk.util";
 import { isPermitted } from "../util/permit.util";
 
-const execute = async (executor: string, users: string) => {
+const execute = async (executor: string, users: string): Promise<void> => {
     if (!users || !isPermitted(executor)) return;
     const usersToLurk: string[] = users.split(",");
     try {

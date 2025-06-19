@@ -1,6 +1,5 @@
 import channelApi, { Broadcaster } from "../api/channel.api";
 import pasteApi, { KeyResponse } from "../api/paste.api";
-import { MAIN_CHANNEL } from "../app";
 import { botSocket } from "../socket/bot.socket";
 import { formatUserData } from "../util/user.util";
 

@@ -1,4 +1,4 @@
-import { MAIN_CHANNEL, OWNER } from "../app";
+import { MAIN_CHANNEL } from "../app";
 import { botSocket } from "../socket/bot.socket";
 import { isJoined } from "../util/channel.util";
 import { joinChannel } from "../util/join.util";
@@ -8,10 +8,10 @@ import { isPermitted } from "../util/permit.util";
 
 export let currentlyLurkedChannel: string | null = null;
 
-const execute = (executor: string, channel: string): void => {
+const execute = (executor: string, from: string, channel: string): void => {
     if (!isPermitted(executor)) return;
-    if (!channel) {
-        botSocket.send(`PRIVMSG #${MAIN_CHANNEL} :stopped lurking #${currentlyLurkedChannel} channel`);
+    if (!channel || currentlyLurkedChannel === channel) {
+        botSocket.send(`PRIVMSG #${from} :stopped lurking #${currentlyLurkedChannel} channel`);
         clearLurkedChannelMessageBuffer();
         currentlyLurkedChannel = null;
     } else {
@@ -19,7 +19,7 @@ const execute = (executor: string, channel: string): void => {
             joinChannel(channel);
         }
         currentlyLurkedChannel = channel;
-        botSocket.send(`PRIVMSG #${MAIN_CHANNEL} :started lurking #${currentlyLurkedChannel} channel`);
+        botSocket.send(`PRIVMSG #${from} :started lurking #${currentlyLurkedChannel} channel`);
         makeLurkingActive();
     }
 };

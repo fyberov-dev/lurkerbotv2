@@ -61,7 +61,7 @@
 
 * WATCH
     USAGE: O_O watch <user>
-    DESCRIPTION: Start mirroring messages of certain user to the TWITCH_MAIN_CHANNEL. The bot will start lurking all followed channels of this users.
+    DESCRIPTION: Start mirroring messages of certain user to the TWITCH_MAIN_CHANNEL. The bot will start lurking all followed channels of this users. Write again to stop watching
     PERMISSION: WITH PERMIT ONLY
     PROPS:
         - user: the lurked user whose messages will be mirrored
@@ -209,6 +209,13 @@
     PERMISSION: ONLY BOT OWNER
     PROPS:
         - channel: channel to leave from
+    
+* LURK LOG
+    USAGE: O_O lurk_log <user>
+        DESCRIPTION: Get logs of the lurking user
+        PERMISSION: WITH PERMIT ONLY
+        PROPS:
+            - user: user to get logs of
 
 * KILL
     USAGE: O_O kill

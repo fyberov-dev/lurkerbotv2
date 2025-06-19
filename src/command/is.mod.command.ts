@@ -1,7 +1,5 @@
 import followsApi, { User } from "../api/follows.api";
-import { MAIN_CHANNEL } from "../app";
 import { botSocket } from "../socket/bot.socket";
-import { isPermitted } from "../util/permit.util";
 import { formatDate, getDuration } from "../util/time.util";
 
 const execute = async (executor: string, from: string, channel: string, user: string): Promise<void> => {

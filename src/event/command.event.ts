@@ -31,6 +31,7 @@ import logsCommand from "../command/logs.command";
 import { addChat, joinedChannelsByBot } from "../util/chat.util";
 import addChatCommand from "../command/add.chat.command";
 import leaveChatCommand from "../command/leave.chat.command";
+import lurkLogCommand from "../command/lurk.log.command";
 
 let canBeExecutedAfter: Date = new Date();
 
@@ -63,7 +64,7 @@ export const onCommand = (data: string): void => {
             break;
         case "mj":
         case "mass_join":
-            massJoinCommand.execute(commandData.username, commandData.properties[0]);
+            massJoinCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "l":
         case "lurk":
@@ -71,11 +72,11 @@ export const onCommand = (data: string): void => {
             break;
         case "unl":
         case "unlurk":
-            unlurkCommand.execute(commandData.username, commandData.properties[0]);
+            unlurkCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "isj":
         case "is_joined":
-            isJoinedCommand.execute(commandData.username, commandData.properties[0]);
+            isJoinedCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "w":
         case "watch":
@@ -83,11 +84,11 @@ export const onCommand = (data: string): void => {
             break;
         case "ds":
         case "dead_socket":
-            deadSocketCommand.execute(commandData.username);
+            deadSocketCommand.execute(commandData.username, commandData.channel);
             break;
         case "lc":
         case "lurk_channel":
-            lurkChannelCommand.execute(commandData.username, commandData.properties[0]);
+            lurkChannelCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
             break;
         case "permit":
             permitCommand.execute(commandData.username, commandData.properties[0]);
@@ -110,7 +111,7 @@ export const onCommand = (data: string): void => {
             break;
         case "wl":
         case "watch_lurking":
-            checkLurkingCommand.execute(commandData.username);
+            checkLurkingCommand.execute(commandData.username, commandData.channel);
             break;
         case "f":
         case "follows":
@@ -172,8 +173,12 @@ export const onCommand = (data: string): void => {
         case "leave_chat":
             leaveChatCommand.execute(commandData.username, commandData.properties[0]);
             break;
+        case "ll":
+        case "lurk_log":
+            lurkLogCommand.execute(commandData.username, commandData.channel, commandData.properties[0]);
+            break;
         case "kill":
-            killCommand.execute(commandData.username);
+            killCommand.execute(commandData.username, commandData.channel);
             break;
     }
     canBeExecutedAfter = new Date(currentTime.getTime() + COMMAND_COOLDOWN);

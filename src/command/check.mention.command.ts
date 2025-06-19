@@ -1,7 +1,6 @@
-import { addMention, checkMentions } from "../util/mention.util";
-import { isPermitted } from "../util/permit.util";
+import { checkMentions } from "../util/mention.util";
 
-const execute = (executor: string) => {
+const execute = (executor: string): void => {
     checkMentions(executor);
 };
 

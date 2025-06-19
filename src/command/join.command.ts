@@ -1,4 +1,3 @@
-import { OWNER } from "../app";
 import { joinChannel } from "../util/join.util";
 import { isPermitted } from "../util/permit.util";
 

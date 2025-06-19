@@ -1,11 +1,6 @@
-import followsApi, { User } from "../api/follows.api";
 import pasteApi, { KeyResponse } from "../api/paste.api";
-import { MAIN_CHANNEL } from "../app";
 import { botSocket } from "../socket/bot.socket";
-import { joinedChannelsByBot } from "../util/chat.util";
 import { getMods } from "../util/chatters.util";
-import { isPermitted } from "../util/permit.util";
-import { formatDate, getDuration } from "../util/time.util";
 
 const execute = async (executor: string, from: string, channel: string) => {
     if (!channel) return;

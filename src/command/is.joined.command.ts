@@ -10,9 +10,9 @@ import { isPermitted } from "../util/permit.util";
  *
  * @param channel channel to check
  */
-const execute = (executor: string, channel: string): void => {
+const execute = (executor: string, from: string, channel: string): void => {
     if (!channel || !isPermitted(executor)) return;
-    botSocket.send(`PRIVMSG #${MAIN_CHANNEL} :${channel}=${isJoined(channel)}`);
+    botSocket.send(`PRIVMSG #${from} :${channel}=${isJoined(channel)}`);
 };
 
 export default {

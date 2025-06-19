@@ -26,7 +26,7 @@ export const parseMessage = (data: string): MessageData | null => {
     };
 };
 
-export const addMessageToBuffer = (user: string, message: string) => {
+export const addMessageToBuffer = (user: string, message: string): void => {
     message = `[${getCurrentDate()}] ${message}`;
     if (user in messageBuffer) {
         messageBuffer[user].push(message);
@@ -35,7 +35,7 @@ export const addMessageToBuffer = (user: string, message: string) => {
     }
 };
 
-export const addMessageToLurkedChannelBuffer = (message: string) => {
+export const addMessageToLurkedChannelBuffer = (message: string): void => {
     lurkedChannelMessageBuffer.push(message);
 };
 
@@ -56,12 +56,30 @@ export const getAndFormatMessagesFromChat = (messages: string[]): string => {
     return log;
 };
 
-export const clearMessageBuffer = () => {
-    Object.keys(messageBuffer).forEach((k) => {
-        delete messageBuffer[k];
-    });
+export const getMessagesFromBuffer = (channel: string): string[] => {
+    const messages: string[] = messageBuffer[channel];
+    if (messages && messages.length > 0) {
+        const messagesCopy: string[] = [...messages];
+        clearMessageBuffer(channel);
+        return messagesCopy;
+    }
+    return [];
 };
 
-export const clearLurkedChannelMessageBuffer = () => {
+export const getMessagesFromLurkingBuffer = (): string[] => {
+    const messages: string[] = lurkedChannelMessageBuffer;
+    if (messages && messages.length > 0) {
+        const messagesCopy: string[] = [...messages];
+        clearLurkedChannelMessageBuffer();
+        return messagesCopy;
+    }
+    return [];
+};
+
+export const clearMessageBuffer = (channel: string): void => {
+    messageBuffer[channel].length = 0;
+};
+
+export const clearLurkedChannelMessageBuffer = (): void => {
     lurkedChannelMessageBuffer.length = 0;
 };

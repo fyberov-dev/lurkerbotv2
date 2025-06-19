@@ -42,8 +42,6 @@ const addLurkerSocket = (): void => {
             lurkerLogger.log(`lurker ${currentSocketId} connected to the #${MAIN_CHANNEL}`);
         } else if (checkIfPing(data)) {
             socket.send("PONG :tmi.twitch.tv");
-            // Too much spam if too many sockets
-            // lurkerLogger.log(`[${currentSocketId}] PONG!`);
         } else if (checkIfMessage(data)) {
             event.onMessage(currentSocketId, data);
         }

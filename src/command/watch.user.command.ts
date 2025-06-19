@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import { logger, LoggerType } from "../logger/logger";
 import { botSocket } from "../socket/bot.socket";
-import { MAIN_CHANNEL } from "../app";
 import { isPermitted } from "../util/permit.util";
 import { getCurrentDate } from "../util/time.util";
 

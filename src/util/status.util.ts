@@ -1,5 +1,4 @@
 import { DEFAULT_PREFIX } from "../app";
-import { MessageData, parseMessage } from "./message.util";
 
 export const checkIfActive = (data: string): boolean => {
     return data.includes(":tmi.twitch.tv CAP * ACK");

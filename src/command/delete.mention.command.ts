@@ -1,7 +1,6 @@
-import { addMention, deleteMention } from "../util/mention.util";
-import { isPermitted } from "../util/permit.util";
+import { deleteMention } from "../util/mention.util";
 
-const execute = (executor: string, word: string) => {
+const execute = (executor: string, word: string): void => {
     if (!word) return;
     deleteMention(executor, word);
 };

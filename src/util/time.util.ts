@@ -1,5 +1,3 @@
-import { serialize } from "v8";
-
 /**
  * @returns
  */
@@ -42,8 +40,8 @@ const formatNumber = (value: number): string => {
 export const getDuration = (since: Date): string => {
     const now: Date = new Date();
 
-    const { years, months, days } = getDateDuration(now, since);
-    const { hours, minutes, seconds } = getTimeDuration(now, since);
+    const { years, months, days }: Duration = getDateDuration(now, since);
+    const { hours, minutes, seconds }: Timestamp = getTimeDuration(now, since);
 
     const parts = [
         years ? `${years}y` : "",
@@ -56,26 +54,15 @@ export const getDuration = (since: Date): string => {
     ];
 
     return parts.join("");
-    // let years: number = getYearsDuration(now, since);
-    // let months: number = getMonthsDuration(now, since);
-    // let days: number = getDaysDuration(now, since);
-
-    // if (days < 0) {
-    //     months -= 1;
-    //     const previousMath = new Date(now.getFullYear(), now.getMonth(), 0);
-    //     days += previousMath.getDate();
-    // }
-
-    // if (months < 0) {
-    //     years -= 1;
-    //     months += 12;
-    // }
-
-    // return `${years ? years + "y" : ""}${months ? months + "mo" : ""}${days ? days + "d" : ""}` || "0d";
 };
 
-const getDateDuration = (now: Date, since: Date) => {
-    // const now: Date = new Date();
+export interface Duration {
+    years: number;
+    months: number;
+    days: number;
+}
+
+const getDateDuration = (now: Date, since: Date): Duration => {
     let years: number = getYearsDuration(now, since);
     let months: number = getMonthsDuration(now, since);
     let days: number = getDaysDuration(now, since);
@@ -98,7 +85,13 @@ const getDateDuration = (now: Date, since: Date) => {
     };
 };
 
-const getTimeDuration = (now: Date, since: Date) => {
+export interface Timestamp {
+    hours: number;
+    minutes: number;
+    seconds: number;
+}
+
+const getTimeDuration = (now: Date, since: Date): Timestamp => {
     let diff: number = Math.abs(now.getTime() - since.getTime());
     const totalSeconds = Math.floor(diff / 1000);
     const hours = Math.floor((totalSeconds / 3600) % 24);
