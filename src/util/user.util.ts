@@ -1,10 +1,8 @@
-import chalk from "chalk";
 import { Badge, Broadcaster, LastBroadcast, Panel, Roles, Stream } from "../api/channel.api";
 import { Clip } from "../api/clip.api";
 import { getFounders, getMods, getVips } from "./chatters.util";
 import { getTopThree } from "./clips.util";
 import { formatDate, getDuration } from "./time.util";
-import { log } from "console";
 import seventvApi, { SevenTVEditors, SevenTVProfile } from "../api/seventv.api";
 import { getEditorNames, getSevenTVProfile } from "./seventv.util";
 

@@ -8,7 +8,7 @@ import {
 } from "../util/message.util";
 import { MAIN_CHANNEL } from "../app";
 import { lurking } from "../util/lurk.util";
-import { logMessages, usersToWatch } from "../command/watch.user.command";
+import { logMessages } from "../command/watch.user.command";
 import { botSocket } from "../socket/bot.socket";
 import { getCurrentDate } from "../util/time.util";
 import { LurkerSocket, lurkerSockets } from "../socket/lurker.socket";

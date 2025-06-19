@@ -2,7 +2,6 @@ import chalk from "chalk";
 import { MAIN_CHANNEL } from "../app";
 import { logger, LoggerType } from "../logger/logger";
 import { botSocket } from "../socket/bot.socket";
-import lurkerSocket, { lurkerSockets } from "../socket/lurker.socket";
 
 const chatLogger = logger(chalk.bgBlueBright, LoggerType.CHAT);
 

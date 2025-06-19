@@ -7,8 +7,6 @@ import { sendToChatAfter, SendToChatAfterFNInstance } from "./chat.util";
 import { botSocket } from "../socket/bot.socket";
 import { MAIN_CHANNEL } from "../app";
 
-// export const joinedChannels: Set<string> = new Set<string>();
-
 const joinLogger: LoggerInstance = logger(chalk.green, LoggerType.JOIN);
 
 export const joinChannel = (channel: string): void => {

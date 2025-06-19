@@ -1,7 +1,5 @@
 import pasteApi, { KeyResponse } from "../api/paste.api";
-import { MAIN_CHANNEL } from "../app";
 import { botSocket } from "../socket/bot.socket";
-import { joinedChannelsByBot } from "../util/chat.util";
 import { getVips } from "../util/chatters.util";
 
 const execute = async (executor: string, from: string, channel: string) => {
